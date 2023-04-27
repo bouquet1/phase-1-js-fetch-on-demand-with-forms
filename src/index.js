@@ -13,13 +13,21 @@ const init = () => {
         fetch(`http://localhost:3000/movies/${input.value}`)
             .then(res => res.json())
             //.then(data => console.log(data))
-        //display that data on the page
-        .then(data => {
+            //display that data on the page
+            .then(data => {
+                const title = document.querySelector('section#movieDetails h4');
+                const summary = document.querySelector('section#movieDetails p');
+                title.textContent = data.title;
+                summary.textContent = data.summary;
+            })
+        // .then(console.log, console.error)
+            .catch(error => console.log(error))
+        /*.catch(err => {
             const title = document.querySelector('section#movieDetails h4');
             const summary = document.querySelector('section#movieDetails p');
-            title.textContent = data.title;
-            summary.textContent = data.summary;
-        })
+            title.textContent = "We don't have that specific movie in our database";
+            summary.textContent = "Request a movie to be included to our database by eamiling us: request@kidsMDb.com "
+        })*/
     });
 };
 
@@ -42,7 +50,7 @@ I just  need to write my code inside init
 const inputForm = document.querySelector("form");
 inputForm.addEventListener('submit', myEventHandler = (event) => {
         event.preventDefault(); // We will always need to use event.preventDefault() to stop the page from refreshing.
-        
+
         //using event to get the value we need (check web's console)
         console.log(event); // SubmitEvent {isTrusted: true, submitter: input, type: 'submit', target: form, currentTarget: form, …}
 
@@ -50,7 +58,7 @@ inputForm.addEventListener('submit', myEventHandler = (event) => {
         console.log(event.target.children); // => HTMLCollection(3) [label, input#searchByID, input, searchByID: input#searchByID]
 
         console.log(event.target.children[1]); // => <input id="searchByID" type="text" placeholder="Enter ID here">
-        
+
        console.log(event.target.children[1].value);  // => whatever you typed into the input inThisCase 3
 
         //access the input element directly instead of using event to get the value we need. I used this option in my code above
@@ -65,7 +73,7 @@ inputForm.addEventListener('submit', myEventHandler = (event) => {
         .then(res => res.json())
         .then(data => {console.log(data);}); // LOG: (3) [{…}, {…}, {…}]
         //to get specific data we can pull specific id's url f.e http://localhost:3000/movies/1
-        // using interpolation to modfiy the URL we pass to our fetch function based on the input typed into the HTML form. So, we need to update the fetch URL for that. 
+        // using interpolation to modfiy the URL we pass to our fetch function based on the input typed into the HTML form. So, we need to update the fetch URL for that.
         fetch(`http://localhost:3000/movies/${input.value}`)
         .then(res => res.json())
         .then(data => console.log(data))
