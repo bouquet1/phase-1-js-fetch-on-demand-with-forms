@@ -20,7 +20,7 @@ const init = () => {
                 title.textContent = data.title;
                 summary.textContent = data.summary;
             })
-        // .then(console.log, console.error)
+            // .then(console.log, console.error)
             .catch(error => console.log(error))
         /*.catch(err => {
             const title = document.querySelector('section#movieDetails h4');
